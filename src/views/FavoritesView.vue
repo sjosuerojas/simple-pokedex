@@ -1,13 +1,9 @@
 <template>
-    <div>
-        Favorites
-    </div>
+  <div>
+    <!-- -->
+    <h1>Favorites</h1>
+  </div>
 </template>
-<script>
-export default {
-    name: 'FavoritesView',
-}
+
+<script setup lang="ts">
 </script>
-<style lang="">
-    
-</style>

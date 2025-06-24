@@ -1,14 +1,9 @@
 <template>
-    <div>
-        Home
-    </div>
+  <div>
+    <!-- -->
+    <h1>Home</h1>
+  </div>
 </template>
-<script>
-export default {
-    name: 'HomeView',
-}
-</script>
 
-<style lang="">
-    
-</style>
+<script setup lang="ts">
+</script>
