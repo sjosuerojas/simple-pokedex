@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { RouterView } from "vue-router";
-import { usePokemonStore } from "./stores/pokemonStore";
+import { RouterView, RouterLink } from "vue-router";
+import { usePokemonStore } from "@/stores/usePokemonStore";
 import PokemonLoader from "@/components/atoms/PokemonLoader.vue";
-import PokemonStartIcon from "@/components/atoms/PokemonStartIcon.vue";
-import PokemonListIcon from "@/components/atoms/PokemonListIcon.vue";
+import ListIcon from "@/components/atoms/icons/ListIcon.vue";
+import StartIcon from "@/components/atoms/icons/StartIcon.vue";
 import "./styles/global.scss";
 
 const store = usePokemonStore();
@@ -14,18 +14,17 @@ const store = usePokemonStore();
     <template v-if="store.isLoading && store.pokemonList.length === 0">
       <PokemonLoader />
     </template>
-
     <template v-else>
       <main class="pokeapp-main">
         <RouterView />
       </main>
       <footer class="pokeapp-footer">
-        <router-link class="btn btn-primary" to="/">
-          <PokemonListIcon /> All
-        </router-link>
-        <router-link class="btn btn-secondary" to="/favorites">
-          <PokemonStartIcon color="#fff" /> Favorites
-        </router-link>
+        <RouterLink class="btn btn-primary" to="/">
+          <ListIcon /> All
+        </RouterLink>
+        <RouterLink class="btn btn-secondary" to="/favorites">
+          <StartIcon color="#fff" /> Favorites
+        </RouterLink>
       </footer>
     </template>
   </div>

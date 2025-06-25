@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePokemonStore } from "@/stores/pokemonStore";
+import { usePokemonStore } from "@/stores/usePokemonStore";
 import { computed } from "vue";
 
 const store = usePokemonStore();

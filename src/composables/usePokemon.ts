@@ -1,10 +1,11 @@
 import { ref, onMounted } from "vue";
-import { usePokemonStore } from "@/stores/pokemonStore";
+import { usePokemonStore } from "@/stores/usePokemonStore";
 import { fetchPokemonList, fetchPokemonDetails } from "@/service/api";
 
 export const usePokemon = () => {
   const store = usePokemonStore();
   const isLoadingMore = ref(false);
+  const isLoadingDetails = ref(false);
 
   const loadPokemon = async (limit = 20, offset = 0) => {
     try {
@@ -35,14 +36,14 @@ export const usePokemon = () => {
 
   const getPokemonDetails = async (name: string) => {
     try {
-      store.isLoading = true;
+      isLoadingDetails.value = true;
       const details = await fetchPokemonDetails(name);
       store.setSelectedPokemon(details);
     } catch (error) {
       store.error = "Failed to load Pokémon details";
       store.setSelectedPokemon(null);
     } finally {
-      store.isLoading = false;
+      isLoadingDetails.value = false;
     }
   };
 
@@ -56,5 +57,6 @@ export const usePokemon = () => {
     loadMorePokemon,
     getPokemonDetails,
     isLoadingMore,
+    isLoadingDetails,
   };
 };

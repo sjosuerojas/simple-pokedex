@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import PokemonGrid from "@/components/molecules/PokemonGrid.vue";
 import PokemonModal from "@/components/organisms/PokemonModal.vue";
-import { usePokemonStore } from "@/stores/pokemonStore";
+import { usePokemonStore } from "@/stores/usePokemonStore";
 import { usePokemon } from "@/composables/usePokemon";
 import { computed } from "vue";
 
 const store = usePokemonStore();
-const { getPokemonDetails } = usePokemon();
+const { getPokemonDetails, isLoadingDetails } = usePokemon();
 const favoritePokemons = computed(() =>
   store.pokemonList.filter((pokemon) => store.isFavorite(pokemon.id))
 );
@@ -29,6 +29,7 @@ const showDetails = (name: string) => {
       <PokemonGrid
         :pokemons="favoritePokemons"
         :is-favorite="store.isFavorite"
+        :is-loading="isLoadingDetails"
         @toggle-favorite="store.toggleFavorite"
         @show-details="showDetails"
       />

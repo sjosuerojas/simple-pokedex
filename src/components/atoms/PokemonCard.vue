@@ -4,6 +4,7 @@ import type { Pokemon } from "@/types/pokemon";
 defineProps<{
   pokemon: Pokemon;
   isFavorite: boolean;
+  isLoading?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -13,7 +14,10 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <article class="pokemon-card" @click="emit('show-details', pokemon.name)">
+  <article
+    :class="['pokemon-card', { 'pokemon-loading': isLoading }]"
+    @click="emit('show-details', pokemon.name)"
+  >
     <div class="pokemon-info">
       <h3 class="pokemon-name">{{ pokemon.name }}</h3>
     </div>
@@ -51,6 +55,11 @@ const emit = defineEmits<{
   cursor: pointer;
   max-width: 570px;
   width: 100%;
+
+  &.pokemon-loading {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
   &:hover {
     transform: translateY(-4px);

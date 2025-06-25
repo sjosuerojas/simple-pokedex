@@ -5,6 +5,7 @@ import type { Pokemon } from "@/types/pokemon";
 defineProps<{
   pokemons: Pokemon[];
   isFavorite: (id: number) => boolean;
+  isLoading: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -20,6 +21,7 @@ const emit = defineEmits<{
       :key="pokemon.id"
       :pokemon="pokemon"
       :is-favorite="isFavorite(pokemon.id)"
+      :is-loading="isLoading"
       @toggle-favorite="emit('toggle-favorite', $event)"
       @show-details="emit('show-details', $event)"
     />
