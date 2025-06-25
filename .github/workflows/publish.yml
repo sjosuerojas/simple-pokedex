@@ -31,8 +31,6 @@ jobs:
           cache: "npm"
       - name: Install dependencies
         run: npm install
-      - name: Linter & Format Files
-        run: npm run lint && npm run format
       - name: Build
         env:
           VITE_URL_API: ${{ vars.VITE_URL_API }}
