@@ -1,93 +1,65 @@
 <script setup lang="ts">
-import { RouterView } from "vue-router";
-import { usePokemonStore } from "./stores/pokemonStore";
-import PokemonLoader from "@/components/atoms/PokemonLoader.vue";
-import PokemonStartIcon from "@/components/atoms/PokemonStartIcon.vue";
-import PokemonListIcon from "@/components/atoms/PokemonListIcon.vue";
-import "./styles/global.scss";
+import MainLayout from "@/components/layouts/MainLayout.vue";
+import { ref } from "vue";
 
-const store = usePokemonStore();
+const started = ref(false);
 </script>
 
 <template>
-  <div class="pokeapp">
-    <template v-if="store.isLoading && store.pokemonList.length === 0">
-      <PokemonLoader />
-    </template>
-
-    <template v-else>
-      <main class="pokeapp-main">
-        <RouterView />
-      </main>
-      <footer class="pokeapp-footer">
-        <router-link class="btn btn-primary" to="/">
-          <PokemonListIcon /> All
-        </router-link>
-        <router-link class="btn btn-secondary" to="/favorites">
-          <PokemonStartIcon color="#fff" /> Favorites
-        </router-link>
-      </footer>
-    </template>
+  <div v-if="!started" class="welcome-section">
+    <img
+      src="./assets/images/welcome-pikachu.png"
+      alt="Pikachu Logo"
+      class="image"
+    />
+    <h1 class="title">Welcome to Pokédex</h1>
+    <p class="description">
+      The digital encyclopedia created by Professor Oak is an invaluable tool to
+      Trainers in the Pokémon world.
+    </p>
+    <button class="main-button" @click="started = true">Get started</button>
   </div>
+  <MainLayout v-else />
 </template>
 
-<style lang="scss">
-.pokeapp {
-  min-height: 100vh;
+<style lang="scss" scoped>
+.welcome-section {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
 
-  &-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #f8f8f8;
-    padding: 1.15rem;
-    text-align: center;
-    box-shadow: 1px -4px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.63rem;
-      padding: 0.6rem 1rem;
-      font-size: 1.13rem;
-      font-weight: 700;
-      border-radius: 60px;
-      transition: background-color 0.3s ease;
-      margin: 0 0.6rem;
-      width: 100%;
-      max-width: 275px;
-
-      &-primary {
-        background-color: #f22539;
-        color: white;
-
-        &:hover {
-          background-color: #d21c2b;
-        }
-      }
-
-      &-secondary {
-        background-color: #bfbfbf;
-        color: white;
-
-        &:hover {
-          background-color: #cfcfcf;
-        }
-      }
-    }
+  .image {
+    width: 100%;
+    max-width: 325px;
+    height: auto;
+    margin-bottom: 3.75rem;
   }
 
-  &-main {
-    flex: 1;
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
+  .title {
+    font-size: 1.65rem;
+    font-weight: 700;
+    margin-bottom: 1.88rem;
+  }
+
+  .description {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #5e5e5e;
+    margin-bottom: 3.5rem;
+    max-width: 570px;
+  }
+
+  .main-button {
+    padding: 0.75rem 1rem;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    background-color: #f22539;
+    color: white;
+    border: none;
+    cursor: pointer;
   }
 }
 </style>

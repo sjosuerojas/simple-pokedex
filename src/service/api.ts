@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_BASE_URL = import.meta.env.VITE_URL_API;
 
-export const fetchPokemonList = async (limit = 20, offset = 0) => {
+export const fetchPokemonList = async (limit = 10, offset = 0) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/pokemon`, {
       params: { limit, offset },

@@ -5,13 +5,17 @@ import type { Pokemon, PokemonDetails } from "@/types/pokemon";
 
 export const usePokemonStore = defineStore("pokemon", () => {
   const pokemonList = ref<Pokemon[]>([]);
-  const favorites = useStorage<number[]>("pokemon-favorites", []);
+  const favorites = useStorage<number[]>("favorites:pks", []);
   const isLoading = ref(false);
   const error = ref<string | null>(null);
   const selectedPokemon = ref<PokemonDetails | null>(null);
 
   const setPokemonList = (list: Pokemon[]) => {
     pokemonList.value = list;
+  };
+
+  const setSelectedPokemon = (pokemon: PokemonDetails | null) => {
+    selectedPokemon.value = pokemon;
   };
 
   const toggleFavorite = (pokemonId: number) => {
@@ -27,19 +31,15 @@ export const usePokemonStore = defineStore("pokemon", () => {
     () => (id: number) => favorites.value.includes(id)
   );
 
-  const setSelectedPokemon = (pokemon: PokemonDetails | null) => {
-    selectedPokemon.value = pokemon;
-  };
-
   return {
     pokemonList,
     favorites,
-    isLoading,
     error,
+    isLoading,
+    isFavorite,
     selectedPokemon,
     setPokemonList,
     toggleFavorite,
-    isFavorite,
     setSelectedPokemon,
   };
 });

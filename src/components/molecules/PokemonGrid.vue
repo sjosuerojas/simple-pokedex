@@ -5,6 +5,7 @@ import type { Pokemon } from "@/types/pokemon";
 defineProps<{
   pokemons: Pokemon[];
   isFavorite: (id: number) => boolean;
+  isLoading: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -14,12 +15,13 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="pokemon-grid">
+  <div class="pokeapp-grid">
     <PokemonCard
       v-for="pokemon in pokemons"
       :key="pokemon.id"
       :pokemon="pokemon"
       :is-favorite="isFavorite(pokemon.id)"
+      :is-loading="isLoading"
       @toggle-favorite="emit('toggle-favorite', $event)"
       @show-details="emit('show-details', $event)"
     />
@@ -27,10 +29,10 @@ const emit = defineEmits<{
 </template>
 
 <style lang="scss" scoped>
-.pokemon-grid {
+.pokeapp-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 0.65rem;
   padding: 1rem 0;
   justify-items: center;
 }

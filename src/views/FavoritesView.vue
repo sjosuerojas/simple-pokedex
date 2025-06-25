@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import PokemonGrid from "@/components/molecules/PokemonGrid.vue";
 import PokemonModal from "@/components/organisms/PokemonModal.vue";
-import { usePokemonStore } from "@/stores/pokemonStore";
+import { usePokemonStore } from "@/stores/usePokemonStore";
 import { usePokemon } from "@/composables/usePokemon";
 import { computed } from "vue";
 
 const store = usePokemonStore();
-const { getPokemonDetails } = usePokemon();
+const { getPokemonDetails, isLoadingDetails } = usePokemon();
 const favoritePokemons = computed(() =>
   store.pokemonList.filter((pokemon) => store.isFavorite(pokemon.id))
 );
@@ -18,9 +18,7 @@ const showDetails = (name: string) => {
 </script>
 
 <template>
-  <div class="favorites-view">
-    <h1>Favorite Pokémon</h1>
-
+  <div class="pokeapp-favorites">
     <template v-if="favoritePokemons.length === 0">
       <div class="empty-state">You haven't favorited any Pokémon yet.</div>
     </template>
@@ -29,17 +27,17 @@ const showDetails = (name: string) => {
       <PokemonGrid
         :pokemons="favoritePokemons"
         :is-favorite="store.isFavorite"
+        :is-loading="isLoadingDetails"
         @toggle-favorite="store.toggleFavorite"
         @show-details="showDetails"
       />
     </template>
-
     <PokemonModal />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.favorites-view {
+.pokeapp-favorites {
   h1 {
     margin-top: 0;
     color: #333;
