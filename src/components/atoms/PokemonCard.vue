@@ -1,32 +1,41 @@
 <script setup lang="ts">
-import type { Pokemon } from '@/types/pokemon'
+import type { Pokemon } from "@/types/pokemon";
 
 defineProps<{
-  pokemon: Pokemon
-  isFavorite: boolean
-}>()
+  pokemon: Pokemon;
+  isFavorite: boolean;
+}>();
 
 const emit = defineEmits<{
-  (e: 'toggle-favorite', id: number): void
-  (e: 'show-details', name: string): void
-}>()
+  (e: "toggle-favorite", id: number): void;
+  (e: "show-details", name: string): void;
+}>();
 </script>
 
 <template>
   <article class="pokemon-card" @click="emit('show-details', pokemon.name)">
-    <div class="pokemon-image-container">
-      <img :src="pokemon.image" :alt="pokemon.name" class="pokemon-image" />
-    </div>
     <div class="pokemon-info">
       <h3 class="pokemon-name">{{ pokemon.name }}</h3>
-      <span class="pokemon-id">#{{ pokemon.id }}</span>
     </div>
     <button
       class="favorite-button"
       @click.stop="emit('toggle-favorite', pokemon.id)"
       :aria-label="isFavorite ? 'Remove from favorites' : 'Add to favorites'"
     >
-      <span :class="['start', { 'start-filled': isFavorite }]">⭐</span>
+      <span class="start">
+        <svg
+          width="26"
+          height="26"
+          viewBox="0 0 26 26"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.6052 0.904438L8.43178 7.62704L1.33161 8.70855C0.0583408 8.9015 -0.451939 10.5415 0.471424 11.4809L5.60824 16.7107L4.39329 24.0984C4.1746 25.4338 5.52076 26.4341 6.64824 25.8096L13 22.3213L19.3518 25.8096C20.4792 26.429 21.8254 25.4338 21.6067 24.0984L20.3918 16.7107L25.5286 11.4809C26.4519 10.5415 25.9417 8.9015 24.6684 8.70855L17.5682 7.62704L14.3948 0.904438C13.8262 -0.293851 12.1787 -0.309084 11.6052 0.904438Z"
+            :fill="isFavorite ? '#eca539' : '#bfbfbf'"
+          />
+        </svg>
+      </span>
     </button>
   </article>
 </template>
@@ -45,21 +54,6 @@ const emit = defineEmits<{
     transform: translateY(-4px);
   }
 
-  .pokemon-image-container {
-    background: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-
-    .pokemon-image {
-      width: 100%;
-      height: auto;
-      max-width: 120px;
-      object-fit: contain;
-    }
-  }
-
   .pokemon-info {
     padding: 1rem;
     text-align: center;
@@ -69,11 +63,6 @@ const emit = defineEmits<{
       text-transform: capitalize;
       color: #333;
       font-size: 1rem;
-    }
-
-    .pokemon-id {
-      color: #666;
-      font-size: 0.8rem;
     }
   }
 
@@ -99,12 +88,7 @@ const emit = defineEmits<{
 
     .start {
       font-size: 1rem;
-      color: #ccc;
       transition: color 0.2s;
-
-      &-filled {
-        color: #ff3e3e;
-      }
     }
   }
 }

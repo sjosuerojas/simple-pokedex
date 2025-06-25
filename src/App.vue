@@ -1,53 +1,82 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView } from "vue-router";
+import { usePokemonStore } from "./stores/pokemonStore";
+import PokemonLoader from "@/components/atoms/PokemonLoader.vue";
+import PokemonStartIcon from "@/components/atoms/PokemonStartIcon.vue";
+import PokemonListIcon from "@/components/atoms/PokemonListIcon.vue";
+import "./styles/global.scss";
+
+const store = usePokemonStore();
 </script>
 
 <template>
-  <div class="app">
-    <header class="app-header">
-      <h1>Pokédex</h1>
-      <nav>
-        <router-link to="/">Home</router-link>
-        <router-link to="/favorites">Favorites</router-link>
-      </nav>
-    </header>
-    <main class="app-main">
-      <RouterView />
-    </main>
+  <div class="pokeapp">
+    <template v-if="store.isLoading && store.pokemonList.length === 0">
+      <PokemonLoader />
+    </template>
+
+    <template v-else>
+      <main class="pokeapp-main">
+        <RouterView />
+      </main>
+      <footer class="pokeapp-footer">
+        <router-link class="btn btn-primary" to="/">
+          <PokemonListIcon /> All
+        </router-link>
+        <router-link class="btn btn-secondary" to="/favorites">
+          <PokemonStartIcon color="#fff" /> Favorites
+        </router-link>
+      </footer>
+    </template>
   </div>
 </template>
 
 <style lang="scss">
-@import './styles/global';
-
-.app {
+.pokeapp {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 
-  &-header {
-    background-color: var(--color-primary);
-    color: white;
-    padding: 1rem;
+  &-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #f8f8f8;
+    padding: 1.15rem;
     text-align: center;
+    box-shadow: 1px -4px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 
-    h1 {
-      margin: 0;
-    }
-
-    nav {
-      display: flex;
+    .btn {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
+      gap: 0.63rem;
+      padding: 0.6rem 1rem;
+      font-size: 1.13rem;
+      font-weight: 700;
+      border-radius: 60px;
+      transition: background-color 0.3s ease;
+      margin: 0 0.6rem;
+      width: 100%;
+      max-width: 275px;
 
-      a {
+      &-primary {
+        background-color: #f22539;
         color: white;
-        text-decoration: none;
 
-        &.router-link-active {
-          font-weight: bold;
-          text-decoration: underline;
+        &:hover {
+          background-color: #d21c2b;
+        }
+      }
+
+      &-secondary {
+        background-color: #bfbfbf;
+        color: white;
+
+        &:hover {
+          background-color: #cfcfcf;
         }
       }
     }

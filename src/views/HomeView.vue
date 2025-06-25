@@ -1,83 +1,59 @@
 <script setup lang="ts">
-import PokemonGrid from '@/components/molecules/PokemonGrid.vue'
-import PokemonModal from '@/components/organisms/PokemonModal.vue'
-import { usePokemonStore } from '@/stores/pokemonStore'
-import { usePokemon } from '@/composables/usePokemon'
-import { onMounted, ref, onBeforeUnmount } from 'vue'
+import PokemonGrid from "@/components/molecules/PokemonGrid.vue";
+import PokemonModal from "@/components/organisms/PokemonModal.vue";
+import { usePokemonStore } from "@/stores/pokemonStore";
+import { usePokemon } from "@/composables/usePokemon";
+import { onMounted, ref, onBeforeUnmount } from "vue";
 
-const store = usePokemonStore()
-const { loadMorePokemon, getPokemonDetails, isLoadingMore } = usePokemon()
-const loadingElement = ref<HTMLElement | null>(null)
+const store = usePokemonStore();
+const { loadMorePokemon, getPokemonDetails, isLoadingMore } = usePokemon();
+const loadingElement = ref<HTMLElement | null>(null);
 
 const handleIntersection = (entries: IntersectionObserverEntry[]) => {
   if (entries[0].isIntersecting && !isLoadingMore.value) {
-    loadMorePokemon()
+    loadMorePokemon();
   }
-}
+};
 
 onMounted(() => {
   const observer = new IntersectionObserver(handleIntersection, {
     root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  })
+    rootMargin: "0px",
+    threshold: 0.1,
+  });
 
   if (loadingElement.value) {
-    observer.observe(loadingElement.value)
+    observer.observe(loadingElement.value);
   }
 
   onBeforeUnmount(() => {
     if (loadingElement.value) {
-      observer.unobserve(loadingElement.value)
+      observer.unobserve(loadingElement.value);
     }
-  })
-})
+  });
+});
 
 const showDetails = (name: string) => {
-  getPokemonDetails(name)
-}
+  getPokemonDetails(name);
+};
 </script>
 
 <template>
   <div class="home-view">
-    <h1>Pokémon List</h1>
+    <PokemonGrid
+      :pokemons="store.pokemonList"
+      :is-favorite="store.isFavorite"
+      @toggle-favorite="store.toggleFavorite"
+      @show-details="showDetails"
+    />
 
-    <template v-if="store.isLoading && store.pokemonList.length === 0">
-      <div class="loading">Loading Pokémon...</div>
-    </template>
-
-    <template v-else>
-      <PokemonGrid
-        :pokemons="store.pokemonList"
-        :is-favorite="store.isFavorite"
-        @toggle-favorite="store.toggleFavorite"
-        @show-details="showDetails"
-      />
-
-      <div ref="loadingElement" class="loading-more">
-        <span v-if="isLoadingMore">Loading more Pokémon...</span>
-        <span v-else-if="!isLoadingMore && store.pokemonList.length > 0"
-          >Scroll to load more</span
-        >
-      </div>
-    </template>
+    <div ref="loadingElement" class="loading-more">
+      <span v-if="isLoadingMore">Loading more Pokémon...</span>
+      <span v-else-if="!isLoadingMore && store.pokemonList.length > 0"
+        >Scroll to load more</span
+      >
+    </div>
 
     <PokemonModal />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.home-view {
-  h1 {
-    margin-top: 0;
-    color: #333;
-  }
-
-  .loading,
-  .loading-more {
-    text-align: center;
-    padding: 2rem;
-    color: #666;
-  }
-}
-</style>
