@@ -1,6 +1,6 @@
 import { ref, onMounted } from "vue";
 import { usePokemonStore } from "@/stores/pokemonStore";
-import { fetchPokemonList, fetchPokemonDetails } from "@/utils/api";
+import { fetchPokemonList, fetchPokemonDetails } from "@/service/api";
 
 export const usePokemon = () => {
   const store = usePokemonStore();
@@ -20,6 +20,7 @@ export const usePokemon = () => {
 
   const loadMorePokemon = async () => {
     if (isLoadingMore.value) return;
+
     try {
       isLoadingMore.value = true;
       const offset = store.pokemonList.length;

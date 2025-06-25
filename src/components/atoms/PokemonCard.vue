@@ -49,6 +49,8 @@ const emit = defineEmits<{
   overflow: hidden;
   transition: transform 0.2s;
   cursor: pointer;
+  max-width: 570px;
+  width: 100%;
 
   &:hover {
     transform: translateY(-4px);
@@ -56,13 +58,14 @@ const emit = defineEmits<{
 
   .pokemon-info {
     padding: 1rem;
-    text-align: center;
+    text-align: left;
 
     .pokemon-name {
       margin: 0;
       text-transform: capitalize;
+      font-size: 1.4rem;
+      font-weight: 500;
       color: #333;
-      font-size: 1rem;
     }
   }
 
@@ -70,10 +73,10 @@ const emit = defineEmits<{
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    background: none;
+    background: #f5f5f5;
     border: none;
     cursor: pointer;
-    padding: 0.25rem;
+    padding: 1.3rem;
     border-radius: 50%;
     width: 2rem;
     height: 2rem;
