@@ -4,6 +4,7 @@ import { usePokemonStore } from "@/stores/usePokemonStore";
 import PokemonLoader from "@/components/atoms/PokemonLoader.vue";
 import ListIcon from "@/components/atoms/icons/ListIcon.vue";
 import StartIcon from "@/components/atoms/icons/StartIcon.vue";
+import SearchBar from "@/components/atoms/SearchBar.vue";
 import "@/styles/global.scss";
 
 const store = usePokemonStore();
@@ -16,6 +17,7 @@ const store = usePokemonStore();
     </template>
     <template v-else>
       <main class="pokeapp-main">
+        <SearchBar />
         <RouterView />
       </main>
       <footer class="pokeapp-footer">

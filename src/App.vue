@@ -17,12 +17,12 @@ const started = ref(false);
       The digital encyclopedia created by Professor Oak is an invaluable tool to
       Trainers in the Pokémon world.
     </p>
-    <button class="btn btn-primary" @click="started = true">Get started</button>
+    <button class="main-button" @click="started = true">Get started</button>
   </div>
   <MainLayout v-else />
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .welcome-section {
   display: flex;
   flex-direction: column;
@@ -52,7 +52,7 @@ const started = ref(false);
     max-width: 570px;
   }
 
-  .btn {
+  .main-button {
     padding: 0.75rem 1rem;
     font-size: 1.2rem;
     border-radius: 30px;
