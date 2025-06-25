@@ -18,9 +18,7 @@ const showDetails = (name: string) => {
 </script>
 
 <template>
-  <div class="favorites-view">
-    <h1>Favorite Pokémon</h1>
-
+  <div class="pokeapp-favorites">
     <template v-if="favoritePokemons.length === 0">
       <div class="empty-state">You haven't favorited any Pokémon yet.</div>
     </template>
@@ -34,13 +32,12 @@ const showDetails = (name: string) => {
         @show-details="showDetails"
       />
     </template>
-
     <PokemonModal />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.favorites-view {
+.pokeapp-favorites {
   h1 {
     margin-top: 0;
     color: #333;

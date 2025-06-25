@@ -15,7 +15,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="pokemon-grid">
+  <div class="pokeapp-grid">
     <PokemonCard
       v-for="pokemon in pokemons"
       :key="pokemon.id"
@@ -29,10 +29,10 @@ const emit = defineEmits<{
 </template>
 
 <style lang="scss" scoped>
-.pokemon-grid {
+.pokeapp-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 0.65rem;
   padding: 1rem 0;
   justify-items: center;
 }

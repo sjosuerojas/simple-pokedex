@@ -19,10 +19,10 @@ const store = usePokemonStore();
         <RouterView />
       </main>
       <footer class="pokeapp-footer">
-        <RouterLink class="btn btn-primary" to="/">
+        <RouterLink class="nav-link" active-class="active" to="/">
           <ListIcon /> All
         </RouterLink>
-        <RouterLink class="btn btn-secondary" to="/favorites">
+        <RouterLink class="nav-link" active-class="active" to="/favorites">
           <StartIcon color="#fff" /> Favorites
         </RouterLink>
       </footer>
@@ -45,9 +45,9 @@ const store = usePokemonStore();
     padding: 1.15rem;
     text-align: center;
     box-shadow: 1px -4px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    z-index: 999;
 
-    .btn {
+    .nav-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -56,26 +56,19 @@ const store = usePokemonStore();
       font-size: 1.13rem;
       font-weight: 700;
       border-radius: 60px;
+      background-color: #bfbfbf;
+      color: white;
       transition: background-color 0.3s ease;
       margin: 0 0.6rem;
       width: 100%;
       max-width: 275px;
 
-      &-primary {
+      &.active {
         background-color: #f22539;
         color: white;
 
         &:hover {
           background-color: #d21c2b;
-        }
-      }
-
-      &-secondary {
-        background-color: #bfbfbf;
-        color: white;
-
-        &:hover {
-          background-color: #cfcfcf;
         }
       }
     }
@@ -84,7 +77,7 @@ const store = usePokemonStore();
   &-main {
     flex: 1;
     padding: 2rem;
-    max-width: 1200px;
+    max-width: 700px;
     margin: 0 auto;
     width: 100%;
   }
