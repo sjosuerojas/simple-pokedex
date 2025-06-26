@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
-  // base: "/simple-pokedex/",
+  base: "/simple-pokedex/",
   plugins: [vue()],
   resolve: {
     alias: {
