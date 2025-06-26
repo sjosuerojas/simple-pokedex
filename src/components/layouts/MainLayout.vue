@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { RouterView, RouterLink } from "vue-router";
+import { computed } from "vue";
+import { RouterView, RouterLink, useRoute } from "vue-router";
 import { usePokemonStore } from "@/stores/usePokemonStore";
 import PokemonLoader from "@/components/atoms/PokemonLoader.vue";
 import ListIcon from "@/components/atoms/icons/ListIcon.vue";
@@ -8,6 +9,9 @@ import SearchBar from "@/components/atoms/SearchBar.vue";
 import "@/styles/global.scss";
 
 const store = usePokemonStore();
+const route = useRoute();
+
+const isSearchVisible = computed(() => route.path.startsWith("/search"));
 </script>
 
 <template>
@@ -20,7 +24,7 @@ const store = usePokemonStore();
         <SearchBar />
         <RouterView />
       </main>
-      <footer class="pokeapp-footer">
+      <footer v-if="!isSearchVisible" class="pokeapp-footer">
         <RouterLink class="nav-link" active-class="active" to="/">
           <ListIcon /> All
         </RouterLink>
