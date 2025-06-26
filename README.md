@@ -1,5 +1,67 @@
-# Vue 3 + TypeScript + Vite
+# Simple Pokédex
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Una Pokédex digital construida con [Vue 3](https://vuejs.org/), [TypeScript](https://www.typescriptlang.org/) y [Vite](https://vitejs.dev/). Permite explorar, buscar y marcar como favoritos a tus Pokémon preferidos, mostrando información detallada de cada uno.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Características
+
+- Listado de Pokémon con scroll infinito
+- Búsqueda por nombre con resultados en pantalla dedicada
+- Favoritos persistentes en almacenamiento local
+- Vista de detalles de cada Pokémon
+- Interfaz moderna y responsiva
+
+## Tecnologías
+
+- [Vue 3](https://vuejs.org/) + Composition API
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Pinia](https://pinia.vuejs.org/) (manejo de estado)
+- [Vue Router](https://router.vuejs.org/) (ruteo)
+- [Axios](https://axios-http.com/) (peticiones HTTP)
+- [Sass](https://sass-lang.com/) (estilos)
+- [PokeAPI](https://pokeapi.co/) (fuente de datos)
+
+## Estructura del proyecto
+
+```
+src/
+  components/
+  composables/
+  router/
+  service/
+  stores/
+  styles/
+  types/
+  views/
+```
+
+## Comandos
+
+```sh
+# Instalar dependencias
+npm install
+
+# Servidor de desarrollo
+npm run dev
+
+# Compilar para producción
+npm run build
+
+# Vista previa de producción
+npm run preview
+```
+
+## Uso
+
+1. Ejecuta `npm install` para instalar las dependencias.
+2. Usa `npm run dev` para iniciar el servidor de desarrollo.
+3. Abre [http://localhost:5173](http://localhost:5173) en tu navegador.
+
+## Créditos
+
+- [PokeAPI](https://pokeapi.co/) por la API de Pokémon.
+- Inspirado por la Pokédex clásica de los juegos de Pokémon.
+
+---
+
+¡Disfruta explorando el mundo Pokémon!
