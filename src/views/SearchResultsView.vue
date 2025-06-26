@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, RouterLink } from "vue-router";
 import { usePokemonStore } from "@/stores/usePokemonStore";
 import PokemonGrid from "@/components/molecules/PokemonGrid.vue";
 import PokemonModal from "@/components/organisms/PokemonModal.vue";
@@ -25,11 +25,11 @@ const showDetails = (name: string) => {
 
 <template>
   <div class="pokeapp-results">
-    <h2>Resultados para "{{ query }}"</h2>
     <template v-if="filteredPokemons.length === 0">
-      <h3 class="title">Uh-oh!</h3>
-      <p class="description">You look lost on your journey!</p>
-      <button class="main-button">Go back home</button>
+      <div class="no-results">
+        <h3 class="title">Uh-oh!</h3>
+        <p class="description">You look lost on your journey!</p>
+      </div>
     </template>
     <template v-else>
       <PokemonGrid
@@ -40,34 +40,48 @@ const showDetails = (name: string) => {
         @show-details="showDetails"
       />
     </template>
+
+    <RouterLink class="main-button" to="/">Go back home</RouterLink>
     <PokemonModal />
   </div>
 </template>
 
 <style lang="scss">
 .pokeapp-results {
-  .title {
-    font-size: 1.65rem;
-    font-weight: 700;
-    margin-bottom: 1.88rem;
-  }
+  text-align: center;
 
-  .description {
-    font-size: 1.15rem;
-    font-weight: 500;
-    color: #5e5e5e;
-    margin-bottom: 3.5rem;
-    max-width: 570px;
+  .no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    .title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 0.625rem;
+    }
+
+    .description {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #5e5e5e;
+      margin-bottom: 1.563rem;
+      max-width: 570px;
+    }
   }
 
   .main-button {
-    padding: 0.75rem 1rem;
-    font-size: 1.2rem;
+    padding: 0.688rem 1.25rem;
+    font-size: 1.125rem;
+    font-weight: 700;
     border-radius: 30px;
     background-color: #f22539;
     color: white;
     border: none;
     cursor: pointer;
+    margin-top: 1.563rem;
   }
 }
 </style>
