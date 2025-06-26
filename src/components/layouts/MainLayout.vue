@@ -80,6 +80,15 @@ const isSearchVisible = computed(() => route.path.startsWith("/search"));
     }
   }
 
+  @media screen and (max-width: 600px) {
+    &-footer {
+      display: flex;
+      .nav-link {
+        max-width: 150px;
+      }
+    }
+  }
+
   &-main {
     flex: 1;
     padding: 2rem;
