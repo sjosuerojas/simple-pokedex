@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute, RouterLink } from "vue-router";
+import { usePokemon } from "@/composables/usePokemon";
 import { usePokemonStore } from "@/stores/usePokemonStore";
 import PokemonGrid from "@/components/molecules/PokemonGrid.vue";
 import PokemonModal from "@/components/organisms/PokemonModal.vue";
-import { usePokemon } from "@/composables/usePokemon";
 
 const route = useRoute();
 const store = usePokemonStore();

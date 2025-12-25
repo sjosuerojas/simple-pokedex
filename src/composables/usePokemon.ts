@@ -2,7 +2,7 @@ import { ref, onMounted } from "vue";
 import { usePokemonStore } from "@/stores/usePokemonStore";
 import { fetchPokemonList, fetchPokemonDetails } from "@/service/api";
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const usePokemon = () => {
   const store = usePokemonStore();
@@ -13,7 +13,6 @@ export const usePokemon = () => {
     try {
       store.isLoading = true;
       const pokemonList = await fetchPokemonList(limit, offset);
-      await sleep(2000); // Simulate network delay
       store.setPokemonList([...store.pokemonList, ...pokemonList]);
     } catch (error) {
       store.error = "Failed to load Pokémon";
