@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
+import { toast } from "vue-sonner";
 import { useStorage } from "@vueuse/core";
 import type { Pokemon, PokemonDetails } from "@/types/pokemon";
 
@@ -22,8 +23,10 @@ export const usePokemonStore = defineStore("pokemon", () => {
     const index = favorites.value.indexOf(pokemonId);
     if (index === -1) {
       favorites.value.push(pokemonId);
+      toast(`Added pokemon to favorites`);
     } else {
       favorites.value.splice(index, 1);
+      toast(`Removed pokemon from favorites`);
     }
   };
 

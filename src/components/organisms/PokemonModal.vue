@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import { toast } from "vue-sonner";
 import { useClipboard } from "@vueuse/core";
 import { usePokemonStore } from "@/stores/usePokemonStore";
 import StartIcon from "../atoms/icons/StartIcon.vue";
@@ -21,15 +22,28 @@ const source = computed(() => {
     `Types: ${pokemon.value.types.map((type) => type.type.name).join(", ")}. `
   );
 });
+
 const { copy, isSupported } = useClipboard({ source });
 
-const closeModal = () => {
-  store.setSelectedPokemon(null);
+const closeModal = () => store.setSelectedPokemon(null);
+
+const handleShare = async () => {
+  if (isSupported.value) {
+    await copy(source.value);
+    toast.success("Pokémon info copied to clipboard!");
+  } else {
+    toast.error("Clipboard API not supported in this browser.");
+  }
 };
 
 const toggleFavorite = () => {
   if (pokemon.value) {
     store.toggleFavorite(pokemon.value.id);
+    toast(
+      isFavorite.value
+        ? `Added pokemon to favorites`
+        : `Removed pokemon from favorites`
+    );
   }
 };
 </script>
@@ -92,7 +106,7 @@ const toggleFavorite = () => {
           v-if="isSupported"
           type="button"
           class="share-button"
-          @click="copy(source)"
+          @click="handleShare"
         >
           Share to my friends
         </button>

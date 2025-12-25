@@ -6,6 +6,8 @@ import PokemonLoader from "@/components/atoms/PokemonLoader.vue";
 import ListIcon from "@/components/atoms/icons/ListIcon.vue";
 import StartIcon from "@/components/atoms/icons/StartIcon.vue";
 import SearchBar from "@/components/atoms/SearchBar.vue";
+import { Toaster } from "vue-sonner";
+import "vue-sonner/style.css";
 import "@/styles/global.scss";
 
 const store = usePokemonStore();
@@ -16,6 +18,7 @@ const isSearchVisible = computed(() => route.path.startsWith("/search"));
 
 <template>
   <div class="pokeapp">
+    <Toaster theme="system" />
     <template v-if="store.isLoading && store.pokemonList.length === 0">
       <PokemonLoader />
     </template>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { onMounted, ref, onBeforeUnmount } from "vue";
+import { usePokemon } from "@/composables/usePokemon";
+import { usePokemonStore } from "@/stores/usePokemonStore";
 import PokemonGrid from "@/components/molecules/PokemonGrid.vue";
 import PokemonModal from "@/components/organisms/PokemonModal.vue";
-import { usePokemonStore } from "@/stores/usePokemonStore";
-import { usePokemon } from "@/composables/usePokemon";
-import { onMounted, ref, onBeforeUnmount } from "vue";
 
 const store = usePokemonStore();
 const { loadMorePokemon, getPokemonDetails, isLoadingMore, isLoadingDetails } =
